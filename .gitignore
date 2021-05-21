@@ -1,4 +1,7 @@
+/bin
+/build
 /output
+/download
 
 *.so
 *.o
