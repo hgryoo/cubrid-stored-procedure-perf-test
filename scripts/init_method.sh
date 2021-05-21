@@ -1,6 +1,6 @@
 #!/bin/bash
 echo 'build'
-cubrid_esql -u $FUNCTION_DIR/test_method.ec -o $OUTPUT_DIR/method.c
+cubrid_esql -u $LOAD_DIR/test_method.ec -o $OUTPUT_DIR/method.c
 
 echo 'compile'
 gcc -c $OUTPUT_DIR/method.c -I$CUBRID/include -fPIC
