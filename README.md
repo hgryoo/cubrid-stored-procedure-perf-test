@@ -1,7 +1,8 @@
 # CUBRID Stored Procedure Performance Testing
 
 ## Prerequisites
-- async-profiler
+- async-profiler (https://github.com/jvm-profiling-tools/async-profiler)
+- jmeter (https://jmeter.apache.org/)
 
 ## Getting Started
 

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# For CUBRID
+
+export PROJECT_PATH=$(pwd)
+export CUBRID=${PROJECT_PATH}/install.out
+export CUBRID_DATABASES=${CUBRID}/databases
+export CUBRID_TMP=${CUBRID}/tmp
+export LD_LIBRARY_PATH=${CUBRID}/lib:${CUBRID}/cci/lib:${LD_LIBRARY_PATH}
+export SHLIB_PATH=${LD_LIBRARY_PATH}
+export LIBPATH=${LD_LIBRARY_PATH}
+export PATH=${CUBRID}/bin:${PATH}
+
+# For Testing Tools
+# TBU
+
+echo "Environment configured for PROJECT_PATH=${PROJECT_PATH}"
+echo "CUBRID=${CUBRID}"
+echo "CUBRID_DATABASES=${CUBRID_DATABASES}"
+# echo "PATH=${PATH}"

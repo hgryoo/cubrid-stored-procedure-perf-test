@@ -14,7 +14,7 @@ public class SpPrepareTest {
 	/*
 	 * CREATE OR REPLACE FUNCTION hello() RETURN STRING
 	 * AS LANGUAGE JAVA
-	 * NAME 'SpCubrid.HelloCubrid() return java.lang.String';
+	 * NAME 'SpPrepareTest.testHello() return java.lang.String';
 	 */
 	public static String testHello () {
 		return "Hello, Cubrid !!";
@@ -27,7 +27,56 @@ public class SpPrepareTest {
 	public static int testWithoutJDBC (int a, int b) {
 		return a + b;
 	}
+
+        public static Integer testInt(Integer i) {
+                return i;
+        }
+
+        public static String testString(String str) {
+                return str;
+        }
 	
+        public static String testWithSQL(int v_code) throws SQLException
+        { 
+    
+            Connection  conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet   rs = null;
+            StringBuffer sql = new StringBuffer();
+            String V_CD_NM = "";
+    
+            sql.append(" SELECT name FROM athlete WHERE  code = ?");
+            
+            try
+            {
+                conn = DriverManager.getConnection("jdbc:default:connection:?charset=utf-8");
+    
+                pstmt = conn.prepareStatement(sql.toString());
+                pstmt.setInt(1, v_code); 
+    
+                rs   = pstmt.executeQuery();
+    
+                while (rs.next())
+                {
+                        V_CD_NM = rs.getString(1);
+                }
+    
+            } catch (SQLException e){
+                if (rs != null)    rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch ( Exception e ) {
+                System.err.println(e.getMessage());
+                e.printStackTrace();
+                return "";
+            } finally {
+                if ( rs != null ) rs.close();
+                if ( pstmt != null ) pstmt.close();
+                if ( conn != null ) conn.close();
+            }
+            return V_CD_NM;
+        }
+
 	/*
 	 * NESTED CALL
 	 * CREATE OR REPLACE FUNCTION testFiboSP(n INT) RETURN int as language java name 'SpPrepareTest.testFibo(int) return int';
@@ -45,7 +94,7 @@ public class SpPrepareTest {
 				int result = 0;
 				Class.forName("cubrid.jdbc.driver.CUBRIDDriver");
 				Connection conn = DriverManager.getConnection("jdbc:default:connection:","","");
-				String fiboStmt = "SELECT testFiboSP (?) + testFibo (?);";
+				String fiboStmt = "SELECT testFiboSP (?) + testFiboSP (?);";
 				PreparedStatement stmt = conn.prepareStatement(fiboStmt);
 				stmt.setInt(1, n - 1);
 				stmt.setInt(2, n - 2);

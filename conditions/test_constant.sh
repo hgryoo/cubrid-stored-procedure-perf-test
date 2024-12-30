@@ -1,0 +1,1 @@
+csql -u dba testdb -i $TMP_DIR/constant.sql > $TMP_DIR/constant.result
